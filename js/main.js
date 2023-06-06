@@ -7,17 +7,21 @@ let users = []
 const getUsers = () => {
   fetch(URL)
     .then(response => response.json())
-    .then(data => users = data)
-    .then(() => renderUserList(users))
+    .then(data => dividing(data, users))
+    .then(() => {
+      renderUserList()
+      renderPagList()
+    }
+    )
     .catch(error => alert('Ошибка: ' + error))
 }
 
 getUsers()
 
 //                        РЕНДЕР ТАБЛИЦЫ
-const renderUserList = users => {
+const renderUserList = (pagItem = 0) => {
   const usersList = document.querySelector('.users__list')
-  users.forEach(user => {
+  users[pagItem].forEach(user => {
     const html = `
     <tr class="user" id="${user.id}">
       <td class="user__name">${user.username}</td>
@@ -31,6 +35,27 @@ const renderUserList = users => {
   })
 }
 
+//                        ПАГИНАЦИЯ
+const pag = pagItem => {
+  destroy()
+  renderUserList(pagItem)
+}
+
+const renderPagList = () => {
+  const pagination = document.querySelector('.pagination')
+
+  const pagItem = document.querySelector('.pagination__item')
+
+  if (!pagItem) {
+    for (let i = 0; i < users.length; i++) {
+      const pagList =
+        `<li class="pagination__item" onclick="pag(${i})">${i + 1}</li>`
+
+      pagination.insertAdjacentHTML('beforeend', pagList)
+    }
+  }
+}
+
 //                        ДЕМОНТАЖ
 const destroy = () => {
   const renderedUsers = document.querySelectorAll('.user')
@@ -40,23 +65,26 @@ const destroy = () => {
 //                        ПОИСК 
 const find = (event) => {
   event.preventDefault()
-  
+
   const searchValue = document.getElementById('input').value
 
   if (searchValue) {
-    users = users.filter(el => {
+    let sortedUsers = users.flat()
+    users = []
+
+    sortedUsers = sortedUsers.filter(el => {
       const itemSortByName = el.username.toLowerCase().includes(searchValue.toLowerCase())
       const itemSortByMail = el.email.toLowerCase().includes(searchValue.toLowerCase())
       return itemSortByName || itemSortByMail
     })
-  }
-
-  if (users.length) {
-    showClearBtn()
-    destroy()
-    renderUserList(users)
-  } else {
-    alert('Совпадений не найдено')
+    if (sortedUsers.length) {
+      showClearBtn()
+      destroy()
+      dividing(sortedUsers, users)
+      renderUserList()
+    } else {
+      alert('Совпадений не найдено')
+    }
   }
 
   document.getElementById('input').value = ''
@@ -70,13 +98,17 @@ const sortByDate = () => {
   document.getElementById('rating').classList.remove('sort__list-item--active')
 
   destroy()
+  let sortedUsers = users.flat()
+  users = []
 
   if (dateCount % 2 === 0) {
-    users = users.sort((a, b) => new Date(a.registration_date) - new Date(b.registration_date))
-    renderUserList(users)
+    sortedUsers = sortedUsers.sort((a, b) => new Date(a.registration_date) - new Date(b.registration_date))
+    dividing(sortedUsers, users)
+    renderUserList()
   } else {
-    users = users.sort((a, b) => new Date(b.registration_date) - new Date(a.registration_date))
-    renderUserList(users)
+    sortedUsers = sortedUsers.sort((a, b) => new Date(b.registration_date) - new Date(a.registration_date))
+    dividing(sortedUsers, users)
+    renderUserList()
   }
 
   dateCount++
@@ -92,13 +124,17 @@ const sortByRating = () => {
   document.getElementById('date').classList.remove('sort__list-item--active')
 
   destroy()
+  let sortedUsers = users.flat()
+  users = []
 
-  if(ratingCount % 2 === 0) {
-    users = users.sort((a, b) => a.rating - b.rating)
-    renderUserList(users)
+  if (ratingCount % 2 === 0) {
+    sortedUsers = sortedUsers.sort((a, b) => a.rating - b.rating)
+    dividing(sortedUsers, users)
+    renderUserList()
   } else {
-    users = users.sort((a, b) => b.rating - a.rating)
-    renderUserList(users)
+    sortedUsers = sortedUsers.sort((a, b) => b.rating - a.rating)
+    dividing(sortedUsers, users)
+    renderUserList()
   }
 
   ratingCount++
@@ -107,7 +143,7 @@ const sortByRating = () => {
 
 //                        СБРОС ФИЛЬТРОВ
 const showClearBtn = () => {
-    document.querySelector('.clear-btn').classList.remove('visually-hidden')
+  document.querySelector('.clear-btn').classList.remove('visually-hidden')
 }
 
 const clearFilter = () => {
@@ -116,7 +152,7 @@ const clearFilter = () => {
   document.getElementById('rating').classList.remove('sort__list-item--active')
 
   destroy()
-
+  users = []
   getUsers()
 }
 
@@ -130,10 +166,13 @@ const getId = id => {
 
 const removeUser = () => {
   destroy()
+  let sortedUsers = users.flat()
+  users = []
 
-  users = users.filter(el => el.id != removeId)
+  sortedUsers = sortedUsers.filter(el => el.id != removeId)
+  dividing(sortedUsers, users)
 
-  renderUserList(users)
+  renderUserList()
 
   showModal()
 }
@@ -141,3 +180,12 @@ const removeUser = () => {
 //                        МОДАЛЬНОЕ ОКНО
 
 const showModal = () => document.querySelector('.modal').classList.toggle('modal--show')
+
+
+//                        ДЕЛЕНИЕ МАССИВА
+
+const dividing = (arr, newArr) => {
+  for (let i = 0; i < arr.length; i += 5) {
+    newArr.push(arr.slice(i, i + 5));
+  }
+}
