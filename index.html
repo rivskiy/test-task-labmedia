@@ -16,8 +16,9 @@
   <div class="container">
     <h1 class="title">Список пользователей</h1>
     <div class="search">
-      <form class="search__container" name="searchForm" onsubmit="find(event)">
-        <input class="search__input" type="text" name="search" placeholder="Поиск по имени и e-mail" id="input">
+      <form class="search__container" onsubmit="find(event)">
+        <input class="search__input" type="text" 
+        placeholder="Поиск по имени и e-mail" id="input">
         <button class="search__btn" type="submit"><span class="visually-hidden">Найти</span></button>
       </form>
       <button class="clear-btn visually-hidden" onclick="clearFilter()">Очистить фильтр</button>
@@ -29,8 +30,8 @@
         <li class="sort__list-item" id="rating" onclick="sortByRating()">Рейтинг</li>
       </ul>
     </div>
-    <div class="overlay">
-      <table class="users-list">
+    <div class="users">
+      <table class="users__list">
         <th>Имя пользователя</th>
         <th>E-mail</th>
         <th>Дата регистрации</th>

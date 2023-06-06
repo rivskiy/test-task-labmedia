@@ -116,12 +116,12 @@ ul {
   border-color: #333333;
 }
 
-.overlay {
+.users {
   padding: 0 16px;
   background-color: #fff;
 }
 
-.users-list {
+.users__list {
   width: 100%;
 
 
@@ -134,7 +134,7 @@ ul {
 
 }
 
-.users-list th {
+.users__list th {
   padding: 14px 0;
   padding-bottom: 20px;
 
