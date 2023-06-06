@@ -52,7 +52,7 @@ const find = (event) => {
   }
 
   if (users.length) {
-    showClearBtn(true)
+    showClearBtn()
     destroy()
     renderUserList(users)
   } else {
@@ -62,11 +62,52 @@ const find = (event) => {
   document.getElementById('input').value = ''
 }
 
-//                        СБРОС ФИЛЬТРОВ
-const showClearBtn = isSort => {
-  if (isSort) {
-    document.querySelector('.clear-btn').classList.remove('visually-hidden')
+//                        СОРТИРОВКА ПО ДАТЕ
+let dateCount = 0
+
+const sortByDate = () => {
+  document.getElementById('date').classList.add('sort__list-item--active')
+  document.getElementById('rating').classList.remove('sort__list-item--active')
+
+  destroy()
+
+  if (dateCount % 2 === 0) {
+    users = users.sort((a, b) => new Date(a.registration_date) - new Date(b.registration_date))
+    renderUserList(users)
+  } else {
+    users = users.sort((a, b) => new Date(b.registration_date) - new Date(a.registration_date))
+    renderUserList(users)
   }
+
+  dateCount++
+
+  showClearBtn()
+}
+
+//                        СОРТИРОВКА ПО РЕЙТИНГУ
+let ratingCount = 0
+
+const sortByRating = () => {
+  document.getElementById('rating').classList.add('sort__list-item--active')
+  document.getElementById('date').classList.remove('sort__list-item--active')
+
+  destroy()
+
+  if(ratingCount % 2 === 0) {
+    users = users.sort((a, b) => a.rating - b.rating)
+    renderUserList(users)
+  } else {
+    users = users.sort((a, b) => b.rating - a.rating)
+    renderUserList(users)
+  }
+
+  ratingCount++
+  showClearBtn()
+}
+
+//                        СБРОС ФИЛЬТРОВ
+const showClearBtn = () => {
+    document.querySelector('.clear-btn').classList.remove('visually-hidden')
 }
 
 const clearFilter = () => {
