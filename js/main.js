@@ -119,3 +119,25 @@ const clearFilter = () => {
 
   getUsers()
 }
+
+
+//                        УДАЛЕНИЕ
+let removeId = null
+
+const getId = id => {
+  removeId = id
+}
+
+const removeUser = () => {
+  destroy()
+
+  users = users.filter(el => el.id != removeId)
+
+  renderUserList(users)
+
+  showModal()
+}
+
+//                        МОДАЛЬНОЕ ОКНО
+
+const showModal = () => document.querySelector('.modal').classList.toggle('modal--show')
