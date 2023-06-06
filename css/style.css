@@ -1,0 +1,221 @@
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #F7F7F7;
+}
+button {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.search {
+  margin-bottom: 70px;
+  padding: 12px 16px;
+  background-color: #FFFFFF;
+  
+  box-shadow: 0px 18px 15px rgba(148, 148, 148, 0.15);
+  border-radius: 7px;
+}
+
+.search__container {
+  position: relative;
+  width: auto;
+  margin-bottom: 24px;
+}
+
+.search__input {
+  width: 900px;
+  padding: 9px 0;
+  padding-left: 31px;
+
+  font-family: inherit;
+  font-size: 12px;
+
+  background: #ECEFF0;
+  border-radius: 4px;
+  border: none;
+}
+.search__btn {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+
+  width: 24px;
+  height: 24px;
+  transform: translateY(-50%);
+  background-image: url(../img/search.svg);
+  background-repeat: no-repeat;
+}
+
+.clear-btn {
+  position: relative;
+
+  padding-left: 18px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #4f4f4f;
+
+  background-image: url(../img//clean.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left;
+}
+
+.sort {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 10px;
+  color: #9EAAB4;
+}
+.sort__list {
+  display: flex;
+  gap: 9px;
+}
+
+.sort__list-item {
+  border-bottom: 1px dashed #9EAAB4;
+  cursor: pointer;
+}
+
+.sort__list-item.sort__list-item--active {
+  color: #333333;
+  border-color: #333333;
+}
+
+.overlay {
+  padding: 0 16px;
+  background-color: #fff;
+}
+
+.users-list {
+  width: 100%;
+
+
+  font-size: 12px;
+  font-weight: 500;
+  color: #ACACAC;
+  border-collapse: collapse;
+  border-radius: 7px;
+  background-color: #FFFFFF;
+
+}
+
+.users-list th {
+  padding: 14px 0;
+  padding-bottom: 20px;
+
+  text-align: left;
+  font-size: 10px;
+  font-weight: 500;
+  color: #9EAAB4;
+}
+
+
+.user td {
+  padding: 14px 0;
+  padding-bottom: 20px;
+  border-top: 1px solid #F7F7F7;
+
+}
+
+.user__name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0CB4F1;
+}
+
+.user__remove-btn {
+  width: 16px;
+  height: 16px;
+  background-image: url(../img//cancel.svg);
+  background-size: contain;
+}
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: none;
+}
+
+.modal__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 353px;
+  height: 134px;
+  padding: 0 36px;
+
+  text-align: center;
+  font-size: 12px;
+
+  background-color: #fff;
+  box-shadow: 0px 18px 15px rgba(148, 148, 148, 0.15);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.modal--show {
+  display: block;
+}
+.modal__message {
+  margin-bottom: 24px;
+  margin-top: 36px;
+}
+
+.modal__btn {
+  display: inline-block;
+  width: 88px;
+  height: 27px;
+  color: #828282;
+  background-color: #E0E0E0;
+  border-radius: 3px;
+}
+
+.modal__btn--close {
+  margin-left: 36px;
+
+}
+.modal__btn:hover,
+.modal__btn:focus  {
+  color: #FFFFFF;
+  background-color: #0CB4F1;
+}
