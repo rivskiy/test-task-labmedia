@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <title>Labmedia test task</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="title">Список пользователей</h1>
+    <div class="search">
+      <div class="search__conainer">
+        <input class="search__input" type="text" placeholder="Поиск по имени и e-mail" id="input">
+        <button class="search__btn" onclick="find()"><span class="visually-hidden">Найти</span></button>
+      </div>
+      <button class="clear-btn" onclick="clearFilter()">Очистить фильтр</button>
+    </div>
+    <div class="sort">
+      <p>Сортировка:</p>
+      <ul class="sort__list">
+        <li class="sort__list-item" id="date" onclick="sortByDate()">Дата регистрации</li>
+        <li class="sort__list-item" id="rating" onclick="sortByRating()">Рейтинг</li>
+      </ul>
+    </div>
+    <table class="user-list">
+      <th>Имя пользователя</th>
+      <th>E-mail</th>
+      <th>Дата регистрации</th>
+      <th>Рейтин</th>
+    </table>
+    <div class="modal">
+      <p>Вы уверены, что хотите удалить пользователя?</p>
+      <button onclick="removeUser()">Да</button>
+      <button onclick="showModal()">Нет</button>
+    </div>
+  </div>
+
+  <script src="/index.js"></script>
+</body>
+
+</html>
